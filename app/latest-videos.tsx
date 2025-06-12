@@ -72,8 +72,8 @@ export default function LatestVideos() {
     {
       id: "YPBx7fIItww",
       title: "Evelyn Edit ❤️ | The Last of Us Part II Character Showcase",
-      views: "125K+ views",
-      timestamp: "2 months ago",
+      views: "74K+ views",
+      timestamp: "4 months ago",
     },
   ]
 

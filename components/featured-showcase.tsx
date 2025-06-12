@@ -13,9 +13,7 @@ export function FeaturedShowcase() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Showcase</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Check out our premium gameplay edits and stealth kills compilation
-          </p>
+          <p className="text-gray-400 max-w-2xl mx-auto">Check out our most popular edit with over 74K views</p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -24,8 +22,8 @@ export function FeaturedShowcase() {
             onClick={() => setIsVideoModalOpen(true)}
           >
             <img
-              src="https://i.ytimg.com/vi/mhchmnYxHVo/maxresdefault.jpg"
-              alt="FarCry 4 Stealth Kills Showcase"
+              src="https://i.ytimg.com/vi/YPBx7fIItww/maxresdefault.jpg"
+              alt="Evelyn Edit - The Last of Us Part II"
               className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -34,8 +32,8 @@ export function FeaturedShowcase() {
               </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-              <h3 className="text-xl md:text-2xl font-bold text-white">FarCry®4 - Aggressive Stealth Kills</h3>
-              <p className="text-gray-300 mt-2">No HUD 1080p - Takedowns Only (800 Subs Special)</p>
+              <h3 className="text-xl md:text-2xl font-bold text-white">Evelyn Edit ❤️ | The Last of Us Part II</h3>
+              <p className="text-gray-300 mt-2">74K+ views • New jeans #fypyoutube #edit #baldursgate3</p>
             </div>
           </div>
 
@@ -50,7 +48,7 @@ export function FeaturedShowcase() {
         </div>
       </div>
 
-      <VideoModal videoId="mhchmnYxHVo" isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} />
+      <VideoModal videoId="YPBx7fIItww" isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} />
     </section>
   )
 }

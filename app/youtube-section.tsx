@@ -62,8 +62,8 @@ export default function YouTubeSection() {
   const featuredShort = {
     id: "YPBx7fIItww",
     title: "Evelyn Edit ❤️ | The Last of Us Part II",
-    views: "125K+ views",
-    timestamp: "2 months ago",
+    views: "74K+ views",
+    timestamp: "4 months ago",
   }
 
   // Updated videos from the channel with better titles

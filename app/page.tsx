@@ -24,7 +24,7 @@ export default function HomePage() {
       <HelpButton />
 
       {/* Video Modal */}
-      <VideoModal videoId="mhchmnYxHVo" isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} />
+      <VideoModal videoId="YPBx7fIItww" isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} />
 
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center overflow-hidden">
@@ -129,9 +129,9 @@ export default function HomePage() {
               rating={4.5}
             />
             <GameCard
-              title="Far Cry 4"
-              image="https://i.ytimg.com/vi/mhchmnYxHVo/maxresdefault.jpg"
-              category="Open World FPS"
+              title="The Last of Us Part II"
+              image="https://i.ytimg.com/vi/YPBx7fIItww/maxresdefault.jpg"
+              category="Action Adventure"
               rating={4.9}
             />
           </div>
