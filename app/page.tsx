@@ -40,7 +40,7 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <div className="mb-6">
               <img
-                src="/images/dutyeditz-new-logo.jpeg"
+                src="/images/dutyeditz-profile.jpeg"
                 alt="DutyEditz Profile"
                 className="w-32 h-32 rounded-lg shadow-lg"
               />
@@ -172,7 +172,7 @@ export default function HomePage() {
               </div>
               <div className="md:w-1/3 flex justify-center">
                 <img
-                  src="/images/dutyeditz-new-logo.jpeg"
+                  src="/images/dutyeditz-profile.jpeg"
                   alt="DutyEditz Profile"
                   className="w-32 h-32 rounded-lg shadow-lg"
                 />
@@ -283,7 +283,7 @@ export default function HomePage() {
               <h3 className="text-xl font-bold mb-4">DutyEditz</h3>
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src="/images/dutyeditz-new-logo.jpeg"
+                  src="/images/dutyeditz-profile.jpeg"
                   alt="DutyEditz Logo"
                   className="h-10 w-10 rounded-full object-cover"
                 />

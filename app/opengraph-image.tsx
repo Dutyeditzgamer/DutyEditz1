@@ -25,12 +25,13 @@ export default async function Image() {
       }}
     >
       <img
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/high%20qq.jpg-VpKIvzRPyhpkXQtXcuM1qsFNEaFxMu.jpeg"
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/high%20qq.jpg-yl76BKNzrv5f9LsNXDfDvdhwSmP8Dn.jpeg"
         alt="DutyEditz Logo"
         style={{
           width: "300px",
           height: "300px",
           marginBottom: "40px",
+          borderRadius: "8px",
         }}
       />
       <h1

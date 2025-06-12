@@ -14,7 +14,7 @@ export function SiteHeader() {
           </Button>
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/images/dutyeditz-new-logo.jpeg"
+              src="/images/dutyeditz-profile.jpeg"
               alt="DutyEditz Logo"
               className="h-10 w-10 rounded-full object-cover"
             />

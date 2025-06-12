@@ -14,11 +14,7 @@ export default function SubscriberCountPage() {
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent z-10" />
-          <img
-            src="/images/dutyeditz-new-logo.jpeg"
-            alt="DutyEditz background"
-            className="w-full h-full object-cover"
-          />
+          <img src="/images/dutyeditz-profile.jpeg" alt="DutyEditz background" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center mb-8">
@@ -33,7 +29,7 @@ export default function SubscriberCountPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <img
-                src="/images/dutyeditz-new-logo.jpeg"
+                src="/images/dutyeditz-profile.jpeg"
                 alt="DutyEditz Logo"
                 className="w-32 h-32 rounded-lg shadow-lg mx-auto mb-6"
               />

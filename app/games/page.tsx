@@ -34,11 +34,11 @@ export default function GamesPage() {
       rating: 5.0,
     },
     {
-      id: "gta5",
-      title: "Grand Theft Auto V",
-      description: "Experience the lives of three very different criminals in the corrupt city of Los Santos.",
-      image: "https://media-rockstargames-com.akamaized.net/rockstargames-newsite/img/global/games/fob/1280/V.jpg",
-      category: "Open World",
+      id: "tlou2",
+      title: "The Last of Us Part II",
+      description: "Follow Ellie's journey for justice in a post-apocalyptic United States ravaged by a pandemic.",
+      image: "https://i.ytimg.com/vi/YPBx7fIItww/maxresdefault.jpg",
+      category: "Action Adventure",
       rating: 4.9,
     },
     {
@@ -88,8 +88,8 @@ export default function GamesPage() {
             Featured Games
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl">
-            Explore our collection of Call of Duty and Grand Theft Auto games. We provide premium editing services,
-            tutorials, and gameplay highlights for these titles.
+            Explore our collection of Call of Duty, Grand Theft Auto, and The Last of Us games. We provide premium
+            editing services, tutorials, and gameplay highlights for these titles.
           </p>
         </div>
       </section>
@@ -147,8 +147,8 @@ export default function GamesPage() {
             <div className="text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Gaming Edits?</h2>
               <p className="text-gray-300 mb-6">
-                We specialize in creating high-quality edits and tutorials for Call of Duty and GTA games. Check out our
-                YouTube channel for examples of our work.
+                We specialize in creating high-quality edits and tutorials for Call of Duty, GTA, and The Last of Us
+                games. Check out our YouTube channel for examples of our work.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j" target="_blank" rel="noopener noreferrer">
