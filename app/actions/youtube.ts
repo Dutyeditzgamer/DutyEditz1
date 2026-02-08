@@ -5,11 +5,15 @@ interface YouTubeChannelStats {
   videoCount: string
   viewCount: string
   isLive: boolean
+  profilePicture: string
+  channelName: string
 }
 
 export async function getChannelStats(): Promise<YouTubeChannelStats> {
   const channelId = "UCwhNE66uZNJGbNjG9FWKpYg" // DutyEditz Channel ID
   const apiKey = process.env.YOUTUBE_API_KEY // Server-side only, no NEXT_PUBLIC_ prefix
+
+  const defaultProfile = "https://yt3.googleusercontent.com/ytc/AIdro_mHMbU-f1MWEOsLqZ9fMGVnCn-0kKEqzLiB8kkDrBxh2A=s176-c-k-c0x00ffffff-no-rj"
 
   try {
     if (!apiKey) {
@@ -19,11 +23,13 @@ export async function getChannelStats(): Promise<YouTubeChannelStats> {
         videoCount: "64+",
         viewCount: "150K+",
         isLive: false,
+        profilePicture: defaultProfile,
+        channelName: "DutyEditz",
       }
     }
 
     const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`,
+      `https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${channelId}&key=${apiKey}`,
       {
         next: { revalidate: 300 }, // Cache for 5 minutes
       },
@@ -37,16 +43,26 @@ export async function getChannelStats(): Promise<YouTubeChannelStats> {
 
     if (data.items && data.items.length > 0) {
       const stats = data.items[0].statistics
+      const snippet = data.items[0].snippet
       const subscriberCount = Number.parseInt(stats.subscriberCount)
       const videoCount = Number.parseInt(stats.videoCount)
       const viewCount = Number.parseInt(stats.viewCount)
+
+      // Get the highest quality thumbnail available
+      const profilePicture =
+        snippet?.thumbnails?.high?.url ||
+        snippet?.thumbnails?.medium?.url ||
+        snippet?.thumbnails?.default?.url ||
+        defaultProfile
+
+      const channelName = snippet?.title || "DutyEditz"
 
       // Format numbers
       const formatCount = (count: number): string => {
         if (count >= 1000000) {
           return (count / 1000000).toFixed(1) + "M"
         } else if (count >= 1000) {
-          return (count / 1000).toFixed(1) + "K"
+          return (count / 1000).toFixed(2).replace(/\.?0+$/, "") + "K"
         }
         return count.toLocaleString()
       }
@@ -56,6 +72,8 @@ export async function getChannelStats(): Promise<YouTubeChannelStats> {
         videoCount: formatCount(videoCount),
         viewCount: formatCount(viewCount),
         isLive: true,
+        profilePicture,
+        channelName,
       }
     }
 
@@ -65,6 +83,8 @@ export async function getChannelStats(): Promise<YouTubeChannelStats> {
       videoCount: "64+",
       viewCount: "150K+",
       isLive: false,
+      profilePicture: defaultProfile,
+      channelName: "DutyEditz",
     }
   } catch (error) {
     console.error("Failed to fetch YouTube stats:", error)
@@ -75,6 +95,8 @@ export async function getChannelStats(): Promise<YouTubeChannelStats> {
       videoCount: "64+",
       viewCount: "150K+",
       isLive: false,
+      profilePicture: defaultProfile,
+      channelName: "DutyEditz",
     }
   }
 }

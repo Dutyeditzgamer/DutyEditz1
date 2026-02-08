@@ -15,9 +15,11 @@ import { FeaturedShowcase } from "@/components/featured-showcase"
 import LatestVideos from "./latest-videos"
 import TrendingShorts from "./trending-shorts"
 import { SiteFooter } from "@/components/site-footer"
+import { useChannelStats } from "@/hooks/use-channel-stats"
 
 export default function HomePage() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const channel = useChannelStats()
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -42,13 +44,15 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <div className="mb-6 flex items-center gap-4">
               <img
-                src="/images/dutyeditz-profile.jpeg"
-                alt="DutyEditz Profile"
-                className="w-20 h-20 rounded-2xl shadow-2xl ring-2 ring-red-600/50"
+                src={channel.profilePicture}
+                alt={channel.channelName}
+                className="w-20 h-20 rounded-2xl shadow-2xl ring-2 ring-red-600/50 object-cover"
               />
               <div className="flex flex-col">
                 <span className="text-xs font-medium tracking-widest uppercase text-red-500">Gaming Creator</span>
-                <span className="text-muted-foreground text-sm">1.05K+ Subscribers</span>
+                <span className="text-muted-foreground text-sm">
+                  {channel.isLoading ? "Loading..." : `${channel.subscriberCount} Subscribers`}
+                </span>
               </div>
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold mb-4 text-foreground leading-tight text-balance">
@@ -181,12 +185,12 @@ export default function HomePage() {
               <div className="md:w-1/3 flex justify-center">
                 <div className="relative">
                   <img
-                    src="/images/dutyeditz-profile.jpeg"
-                    alt="DutyEditz Profile"
+                    src={channel.profilePicture}
+                    alt={channel.channelName}
                     className="w-48 h-48 rounded-2xl shadow-2xl object-cover ring-2 ring-red-600/30"
                   />
                   <div className="absolute -bottom-3 -right-3 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
-                    1.05K+ Subs
+                    {channel.subscriberCount} Subs
                   </div>
                 </div>
               </div>
@@ -196,22 +200,22 @@ export default function HomePage() {
                   About DutyEditz
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  DutyEditz is a passion-driven gaming content creation channel dedicated to producing premium-quality video edits, cinematic showcases, and gameplay highlights. With over 1,050 subscribers and 64+ videos, we specialize in bringing the best moments from Call of Duty, GTA, The Last of Us, and more.
+                  DutyEditz is a passion-driven gaming content creation channel dedicated to producing premium-quality video edits, cinematic showcases, and gameplay highlights. We specialize in bringing the best moments from Call of Duty, GTA, The Last of Us, and more.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Our most popular edit -- the Evelyn Edit from The Last of Us Part II -- has reached over 74,000 views, proving that quality content resonates with gamers worldwide. We believe in community, creativity, and pushing the boundaries of gaming content.
+                  Our most popular edit -- the Evelyn Edit from The Last of Us Part II -- has reached incredible view counts, proving that quality content resonates with gamers worldwide. We believe in community, creativity, and pushing the boundaries of gaming content.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <div className="bg-secondary px-4 py-2 rounded-lg">
-                    <span className="text-red-500 font-bold text-lg">74K+</span>
-                    <span className="text-muted-foreground text-sm ml-2">Top Video Views</span>
+                    <span className="text-red-500 font-bold text-lg">{channel.viewCount}</span>
+                    <span className="text-muted-foreground text-sm ml-2">Total Views</span>
                   </div>
                   <div className="bg-secondary px-4 py-2 rounded-lg">
-                    <span className="text-red-500 font-bold text-lg">64+</span>
+                    <span className="text-red-500 font-bold text-lg">{channel.videoCount}</span>
                     <span className="text-muted-foreground text-sm ml-2">Videos</span>
                   </div>
                   <div className="bg-secondary px-4 py-2 rounded-lg">
-                    <span className="text-red-500 font-bold text-lg">1.05K+</span>
+                    <span className="text-red-500 font-bold text-lg">{channel.subscriberCount}</span>
                     <span className="text-muted-foreground text-sm ml-2">Subscribers</span>
                   </div>
                 </div>

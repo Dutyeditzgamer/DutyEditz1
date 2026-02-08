@@ -1,3 +1,5 @@
+"use client"
+
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ChannelStats } from "@/components/channel-stats"
@@ -5,8 +7,11 @@ import { LiveSubscriberBadge } from "@/components/live-subscriber-badge"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, Youtube } from "lucide-react"
+import { useChannelStats } from "@/hooks/use-channel-stats"
 
 export default function SubscriberCountPage() {
+  const channel = useChannelStats()
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -15,7 +20,11 @@ export default function SubscriberCountPage() {
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent z-10" />
-          <img src="/images/dutyeditz-profile.jpeg" alt="DutyEditz background" className="w-full h-full object-cover" />
+          <img
+            src={channel.profilePicture}
+            alt={`${channel.channelName} background`}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center mb-8">
@@ -30,15 +39,15 @@ export default function SubscriberCountPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <img
-                src="/images/dutyeditz-profile.jpeg"
-                alt="DutyEditz Logo"
-                className="w-28 h-28 rounded-2xl shadow-2xl mx-auto mb-6 ring-2 ring-red-600/30"
+                src={channel.profilePicture}
+                alt={`${channel.channelName} Logo`}
+                className="w-28 h-28 rounded-2xl shadow-2xl mx-auto mb-6 ring-2 ring-red-600/30 object-cover"
               />
             </div>
 
             <span className="text-xs font-medium tracking-widest uppercase text-red-500">Real-time Data</span>
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 mt-2 text-foreground">
-              DutyEditz Live Stats
+              {channel.channelName} Live Stats
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
               Track our YouTube channel growth in real-time. Join our growing community of gaming enthusiasts!
@@ -68,7 +77,7 @@ export default function SubscriberCountPage() {
                 Join Our Growing Community!
               </h2>
               <p className="text-muted-foreground mb-6">
-                Be part of the DutyEditz family and get access to exclusive gaming content, tutorials, and live streams.
+                Be part of the {channel.channelName} family and get access to exclusive gaming content, tutorials, and live streams.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j" target="_blank" rel="noopener noreferrer">

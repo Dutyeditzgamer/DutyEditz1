@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, Menu, X, Youtube } from "lucide-react"
 import { LiveSubscriberBadge } from "@/components/live-subscriber-badge"
+import { useChannelStats } from "@/hooks/use-channel-stats"
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -22,6 +23,7 @@ export function SiteHeader() {
   const [searchQuery, setSearchQuery] = useState("")
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const channel = useChannelStats()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,8 +91,8 @@ export function SiteHeader() {
           {/* Left: Logo */}
           <Link href="/" className="flex items-center gap-3">
             <img
-              src="/images/dutyeditz-profile.jpeg"
-              alt="DutyEditz Logo"
+              src={channel.profilePicture}
+              alt={channel.channelName}
               className="h-9 w-9 rounded-full object-cover ring-2 ring-red-600/50"
             />
             <span className="font-display text-xl font-bold text-foreground tracking-tight">

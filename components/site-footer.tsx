@@ -2,9 +2,11 @@
 
 import Link from "next/link"
 import { Youtube } from "lucide-react"
+import { useChannelStats } from "@/hooks/use-channel-stats"
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear()
+  const channel = useChannelStats()
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id)
@@ -20,8 +22,8 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/images/dutyeditz-profile.jpeg"
-                alt="DutyEditz Logo"
+                src={channel.profilePicture}
+                alt={channel.channelName}
                 className="h-10 w-10 rounded-full object-cover ring-2 ring-red-600/50"
               />
               <h3 className="text-lg font-display font-bold text-foreground">DutyEditz</h3>
