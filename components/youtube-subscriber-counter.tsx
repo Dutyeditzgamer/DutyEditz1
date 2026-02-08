@@ -71,7 +71,7 @@ export function YouTubeSubscriberCounter({ className = "", showIcon = true, size
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       {showIcon && <Youtube className={`${getIconSize()} text-red-500`} />}
-      <span className={`font-medium text-gray-300 ${getSizeClasses()}`}>
+      <span className={`font-medium text-muted-foreground ${getSizeClasses()}`}>
         {isLoading ? "Loading..." : `${subscriberCount} subscribers`}
       </span>
     </div>

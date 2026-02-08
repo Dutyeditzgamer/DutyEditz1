@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ChevronRight, Download, Youtube } from "lucide-react"
+import { ChevronRight, Youtube, Play, ArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import GameCard from "@/components/game-card"
 import TestimonialCard from "@/components/testimonial-card"
@@ -14,12 +14,13 @@ import { VideoModal } from "@/components/video-modal"
 import { FeaturedShowcase } from "@/components/featured-showcase"
 import LatestVideos from "./latest-videos"
 import TrendingShorts from "./trending-shorts"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function HomePage() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <HelpButton />
 
@@ -29,7 +30,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 z-10" />
           <img
             src="https://sjc.microlink.io/1tzXoIt90zI_DaJ8KBAdKGN6GRehkTlIZu5NfAy-HSeY2-okjUQiSKznO1KUS1iWUbcdhoxofcSTsgiLbDhMNQ.jpeg"
             alt="GTA 6 promotional artwork"
@@ -38,38 +40,45 @@ export default function HomePage() {
         </div>
         <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-2xl">
-            <div className="mb-6">
+            <div className="mb-6 flex items-center gap-4">
               <img
                 src="/images/dutyeditz-profile.jpeg"
                 alt="DutyEditz Profile"
-                className="w-32 h-32 rounded-lg shadow-lg"
+                className="w-20 h-20 rounded-2xl shadow-2xl ring-2 ring-red-600/50"
               />
+              <div className="flex flex-col">
+                <span className="text-xs font-medium tracking-widest uppercase text-red-500">Gaming Creator</span>
+                <span className="text-muted-foreground text-sm">1.05K+ Subscribers</span>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-4 text-foreground leading-tight text-balance">
               DutyEditz
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-300">
-              Elevate your gaming experience with premium edits, tutorials, and community support
+            <p className="text-lg md:text-xl mb-8 text-muted-foreground leading-relaxed max-w-lg">
+              Premium gaming edits, cinematic showcases, and community-driven content for the most iconic titles.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-red-600 text-white hover:bg-red-700 font-medium"
+                onClick={() => {
+                  document.getElementById("videos")?.scrollIntoView({ behavior: "smooth" })
+                }}
               >
-                Get Started <ChevronRight className="ml-2 h-4 w-4" />
+                Watch Content <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-purple-500 text-purple-500 hover:bg-purple-950/20"
+                className="border-border text-foreground hover:bg-accent"
                 onClick={() => setIsVideoModalOpen(true)}
               >
-                Watch Showcase
+                <Play className="mr-2 h-4 w-4" /> Watch Showcase
               </Button>
               <a href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+                  className="bg-red-600/10 text-red-500 border border-red-600/30 hover:bg-red-600/20 w-full sm:w-auto"
                 >
                   <Youtube className="mr-2 h-5 w-5" /> Subscribe
                 </Button>
@@ -77,27 +86,45 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+          <button
+            onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Scroll down"
+          >
+            <ArrowDown className="h-6 w-6" />
+          </button>
+        </div>
       </section>
 
       {/* Featured Showcase */}
-      <FeaturedShowcase />
+      <section id="showcase">
+        <FeaturedShowcase />
+      </section>
 
       {/* Game Categories */}
       <GameCategories />
 
       {/* YouTube Videos Section */}
-      <LatestVideos />
+      <section id="videos">
+        <LatestVideos />
+      </section>
       <TrendingShorts />
 
       {/* Games Showcase */}
-      <section className="py-20 bg-gray-900">
+      <section id="games" className="py-20 bg-secondary/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Games</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Check out our most popular games and editing services</p>
+            <span className="text-xs font-medium tracking-widest uppercase text-red-500">Our Collection</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 mt-2 text-foreground">Featured Games</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explore our most popular games and editing showcases
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <GameCard
               title="Call of Duty: Modern Warfare"
               image="https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/blog/hero/mw-wz/WZ-Season-Three-Announce-TOUT.jpg"
@@ -112,19 +139,19 @@ export default function HomePage() {
             />
             <GameCard
               title="Fortnite"
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/fortnite-card.jpg"
               category="Battle Royale"
               rating={4.6}
             />
             <GameCard
               title="Apex Legends"
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/apex-legends-card.jpg"
               category="Battle Royale"
               rating={4.7}
             />
             <GameCard
               title="Valorant"
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/valorant-card.jpg"
               category="Tactical FPS"
               rating={4.5}
             />
@@ -138,90 +165,56 @@ export default function HomePage() {
 
           <div className="text-center mt-12">
             <Link href="/games">
-              <Button size="lg" variant="outline" className="border-purple-500 text-purple-500 hover:bg-purple-950/20">
-                View All Games
+              <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent">
+                View All Games <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Support Section */}
-      <section className="py-16 bg-gradient-to-r from-gray-900 to-black">
+      {/* About Section */}
+      <section id="about" className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-r from-gray-800/80 to-gray-900/80 p-8 rounded-xl border border-purple-500/30">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="md:w-2/3">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Help or Support?</h2>
-                <p className="text-gray-300 mb-6">
-                  Our dedicated support team is ready to assist you with any questions or issues you might have.
-                </p>
-                <div className="flex items-center p-3 bg-gray-700/50 rounded-lg mb-4">
-                  <span className="text-gray-400 mr-2">Email:</span>
-                  <a
-                    href="mailto:chamilakusumsiri936@gmail.com"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    chamilakusumsiri936@gmail.com
-                  </a>
-                </div>
-                <p className="text-gray-400 text-sm">
-                  We typically respond to all inquiries within 24 hours. For urgent matters, please include "URGENT" in
-                  the subject line.
-                </p>
-              </div>
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="md:w-1/3 flex justify-center">
-                <img
-                  src="/images/dutyeditz-profile.jpeg"
-                  alt="DutyEditz Profile"
-                  className="w-32 h-32 rounded-lg shadow-lg"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Download Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent z-10" />
-          <img
-            src="https://sjc.microlink.io/1tzXoIt90zI_DaJ8KBAdKGN6GRehkTlIZu5NfAy-HSeY2-okjUQiSKznO1KUS1iWUbcdhoxofcSTsgiLbDhMNQ.jpeg"
-            alt="GTA 6 background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 p-8 md:p-12 rounded-2xl border border-purple-500/30">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="md:w-2/3">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Download Our App</h2>
-                <p className="text-gray-300 mb-6">
-                  Get access to exclusive content, tutorials, and community features with our mobile app.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  >
-                    <Download className="mr-2 h-5 w-5" /> App Store
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-purple-500 text-purple-500 hover:bg-purple-950/20"
-                  >
-                    <Download className="mr-2 h-5 w-5" /> Google Play
-                  </Button>
+                <div className="relative">
+                  <img
+                    src="/images/dutyeditz-profile.jpeg"
+                    alt="DutyEditz Profile"
+                    className="w-48 h-48 rounded-2xl shadow-2xl object-cover ring-2 ring-red-600/30"
+                  />
+                  <div className="absolute -bottom-3 -right-3 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                    1.05K+ Subs
+                  </div>
                 </div>
               </div>
-              <div className="md:w-1/3">
-                <img
-                  src="/placeholder.svg?height=600&width=300"
-                  alt="Mobile app"
-                  className="w-full max-w-[250px] mx-auto rounded-xl shadow-2xl"
-                />
+              <div className="md:w-2/3">
+                <span className="text-xs font-medium tracking-widest uppercase text-red-500">Who We Are</span>
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 mt-2 text-foreground">
+                  About DutyEditz
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  DutyEditz is a passion-driven gaming content creation channel dedicated to producing premium-quality video edits, cinematic showcases, and gameplay highlights. With over 1,050 subscribers and 64+ videos, we specialize in bringing the best moments from Call of Duty, GTA, The Last of Us, and more.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Our most popular edit -- the Evelyn Edit from The Last of Us Part II -- has reached over 74,000 views, proving that quality content resonates with gamers worldwide. We believe in community, creativity, and pushing the boundaries of gaming content.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <div className="bg-secondary px-4 py-2 rounded-lg">
+                    <span className="text-red-500 font-bold text-lg">74K+</span>
+                    <span className="text-muted-foreground text-sm ml-2">Top Video Views</span>
+                  </div>
+                  <div className="bg-secondary px-4 py-2 rounded-lg">
+                    <span className="text-red-500 font-bold text-lg">64+</span>
+                    <span className="text-muted-foreground text-sm ml-2">Videos</span>
+                  </div>
+                  <div className="bg-secondary px-4 py-2 rounded-lg">
+                    <span className="text-red-500 font-bold text-lg">1.05K+</span>
+                    <span className="text-muted-foreground text-sm ml-2">Subscribers</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -229,32 +222,35 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-black">
+      <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Gamers Say</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Hear from our community of gamers and content creators</p>
+            <span className="text-xs font-medium tracking-widest uppercase text-red-500">Community</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 mt-2 text-foreground">What Gamers Say</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Hear from our community of gamers and content creators
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <TestimonialCard
               name="Alex Johnson"
               role="Professional Streamer"
-              image="/placeholder.svg?height=100&width=100"
+              image="/images/avatar-alex.jpg"
               quote="DutyEditz has completely transformed my content. The editing quality is unmatched and the community is incredibly supportive."
               rating={5}
             />
             <TestimonialCard
               name="Sarah Williams"
               role="Competitive Gamer"
-              image="/placeholder.svg?height=100&width=100"
+              image="/images/avatar-sarah.jpg"
               quote="The tutorials helped me improve my skills dramatically. I've won three tournaments since joining DutyEditz!"
               rating={5}
             />
             <TestimonialCard
               name="Mike Chen"
               role="Content Creator"
-              image="/placeholder.svg?height=100&width=100"
+              image="/images/avatar-mike.jpg"
               quote="The editing services are top-notch. My channel has grown 300% since I started using DutyEditz for my gameplay videos."
               rating={4}
             />
@@ -262,13 +258,104 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-xs font-medium tracking-widest uppercase text-red-500">Get In Touch</span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 mt-2 text-foreground">
+                Need Help or Want to Collaborate?
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our team is ready to assist you with any questions, custom editing requests, or collaboration ideas.
+              </p>
+            </div>
+            <div className="bg-card border border-border rounded-2xl p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-lg font-display font-bold text-foreground mb-4">Contact Information</h3>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
+                      <div className="bg-red-600/10 p-2 rounded-md">
+                        <svg className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Email</p>
+                        <a
+                          href="mailto:chamilakusumsiri936@gmail.com"
+                          className="text-red-500 hover:text-red-400 transition-colors font-medium"
+                        >
+                          chamilakusumsiri936@gmail.com
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
+                      <div className="bg-red-600/10 p-2 rounded-md">
+                        <Youtube className="h-5 w-5 text-red-500" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">YouTube</p>
+                        <a
+                          href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-red-500 hover:text-red-400 transition-colors font-medium"
+                        >
+                          @DutyEditz
+                        </a>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-2">
+                      We typically respond to all inquiries within 24 hours. For urgent matters, please include
+                      &quot;URGENT&quot; in the subject line.
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-display font-bold text-foreground mb-4">Quick Actions</h3>
+                  <div className="flex flex-col gap-3">
+                    <a href="mailto:chamilakusumsiri936@gmail.com">
+                      <Button className="w-full bg-red-600 text-white hover:bg-red-700">
+                        Send an Email
+                      </Button>
+                    </a>
+                    <a
+                      href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="outline" className="w-full border-border text-foreground hover:bg-accent">
+                        <Youtube className="mr-2 h-4 w-4" /> Visit YouTube Channel
+                      </Button>
+                    </a>
+                    <Button
+                      variant="outline"
+                      className="w-full border-border text-foreground hover:bg-accent"
+                      onClick={() => document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth" })}
+                    >
+                      Subscribe to Newsletter
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter */}
-      <section className="py-20 bg-gradient-to-b from-black to-gray-900">
+      <section id="newsletter" className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
-            <p className="text-gray-400 mb-8">
-              Subscribe to our newsletter for the latest gaming news, tutorials, and exclusive offers
+            <span className="text-xs font-medium tracking-widest uppercase text-red-500">Stay Updated</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 mt-2 text-foreground">
+              Join the Community
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Subscribe to our newsletter for the latest gaming news, new video drops, and exclusive offers
             </p>
             <NewsletterForm />
           </div>
@@ -276,149 +363,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">DutyEditz</h3>
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/images/dutyeditz-profile.jpeg"
-                  alt="DutyEditz Logo"
-                  className="h-10 w-10 rounded-full object-cover"
-                />
-                <p className="text-gray-400">
-                  Elevating your gaming experience with premium edits and community support.
-                </p>
-              </div>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                  <span className="sr-only">Twitter</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                  </svg>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                  <span className="sr-only">Instagram</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-red-500 transition-colors"
-                >
-                  <span className="sr-only">YouTube</span>
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/videos" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Videos
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/games" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Games
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Services</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Video Editing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Tutorials
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Coaching
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Tournaments
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
-                    Community
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <span className="font-medium">Support Email:</span>
-                  <br />
-                  <a
-                    href="mailto:chamilakusumsiri936@gmail.com"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    chamilakusumsiri936@gmail.com
-                  </a>
-                </li>
-                <li>Phone: +1 (555) 123-4567</li>
-                <li>Address: 123 Gaming Street, Digital City, DC 12345</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-500">
-            <p>&copy; {new Date().getFullYear()} DutyEditz. All rights reserved.</p>
-            <div className="mt-4">
-              <a
-                href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-red-500 hover:text-red-400 transition-colors"
-              >
-                <Youtube className="mr-2 h-5 w-5" />
-                Subscribe to our YouTube channel
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

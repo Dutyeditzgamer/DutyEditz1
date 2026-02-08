@@ -1,4 +1,4 @@
-import { Star } from "lucide-react"
+import { Star, Quote } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface TestimonialCardProps {
@@ -11,19 +11,27 @@ interface TestimonialCardProps {
 
 export default function TestimonialCard({ name, role, image, quote, rating }: TestimonialCardProps) {
   return (
-    <Card className="bg-gray-800/50 border-gray-700 hover:border-purple-500/30 transition-all">
+    <Card className="bg-card border-border hover:border-red-600/30 transition-all duration-300">
       <CardContent className="pt-6">
-        <div className="flex items-center mb-4">
+        <Quote className="h-8 w-8 text-red-600/30 mb-3" />
+        <div className="flex items-center mb-3">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`h-4 w-4 ${i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-500"}`} />
+            <Star
+              key={i}
+              className={`h-4 w-4 ${i < rating ? "text-amber-500 fill-amber-500" : "text-muted"}`}
+            />
           ))}
         </div>
-        <p className="text-gray-300 mb-6 italic">"{quote}"</p>
-        <div className="flex items-center">
-          <img src={image || "/placeholder.svg"} alt={name} className="w-12 h-12 rounded-full mr-4 object-cover" />
+        <p className="text-muted-foreground mb-6 leading-relaxed">&quot;{quote}&quot;</p>
+        <div className="flex items-center gap-3">
+          <img
+            src={image || "/placeholder.svg"}
+            alt={name}
+            className="w-11 h-11 rounded-full object-cover ring-2 ring-border"
+          />
           <div>
-            <h4 className="font-bold">{name}</h4>
-            <p className="text-sm text-gray-400">{role}</p>
+            <h4 className="font-bold text-foreground text-sm">{name}</h4>
+            <p className="text-xs text-muted-foreground">{role}</p>
           </div>
         </div>
       </CardContent>

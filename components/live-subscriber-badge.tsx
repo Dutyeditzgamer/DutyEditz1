@@ -13,12 +13,10 @@ export function LiveSubscriberBadge() {
     const fetchSubscriberCount = async () => {
       try {
         setIsLoading(true)
-
         const stats = await getChannelStats()
         setSubscriberCount(stats.subscriberCount)
         setIsLive(stats.isLive)
-      } catch (error) {
-        console.error("Failed to fetch subscriber count:", error)
+      } catch {
         setSubscriberCount("1.05K+")
         setIsLive(false)
       } finally {
@@ -27,10 +25,7 @@ export function LiveSubscriberBadge() {
     }
 
     fetchSubscriberCount()
-
-    // Update every 5 minutes
     const interval = setInterval(fetchSubscriberCount, 300000)
-
     return () => clearInterval(interval)
   }, [])
 
@@ -39,19 +34,19 @@ export function LiveSubscriberBadge() {
       href="https://youtube.com/@dutyeditz?si=A4T_oGPsxdTz9b6j"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/20 to-red-700/20 border border-red-500/30 rounded-full px-3 py-1.5 hover:border-red-500/50 transition-all group"
+      className="inline-flex items-center gap-2 bg-red-600/10 border border-red-600/30 rounded-full px-3 py-1.5 hover:border-red-500/50 transition-all group"
     >
       <div className="flex items-center gap-1.5">
         <Youtube className="h-4 w-4 text-red-500" />
         {isLive && (
           <div className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-xs text-red-400 font-medium">LIVE</span>
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+            <span className="text-xs text-red-500 font-medium">LIVE</span>
           </div>
         )}
       </div>
-      <span className="text-sm font-medium text-white">{isLoading ? "Loading..." : subscriberCount}</span>
-      <TrendingUp className="h-3 w-3 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <span className="text-sm font-medium text-foreground">{isLoading ? "..." : subscriberCount}</span>
+      <TrendingUp className="h-3 w-3 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" />
     </a>
   )
 }
